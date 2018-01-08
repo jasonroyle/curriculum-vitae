@@ -36,12 +36,33 @@
           elem.animate({ width: elem.attr('aria-valuenow') + '%' }, 200, 'linear');
         }, index * 300);
       });
+
+      $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+          if (!$('body').hasClass('night')) {
+            $('body').addClass('night');
+          }
+        } else if ($('body').hasClass('night')) {
+          $('body').removeClass('night');
+        }
+      });
     });
   </script>
 </head>
 <body>
 
-  <div id="Top">
+  <div id="Sky">
+
+    <div
+      id="NightSky"
+      class="light"
+    ></div>
+    <div id="Sun">
+      <div
+        id="NightSun"
+        class="light"
+      ></div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -104,7 +125,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card silhouette">
         <div class="card-body">
           <dl class="row align-items-center skills">
 
@@ -517,10 +538,14 @@
           </dl>
         </div>
       </div>
+
     </div>
   </div>
 
-  <div class="container">
+  <div
+    id="Terminal"
+    class="container light-flicker"
+  >
     <p>I began web development as a hobby at the age of 15, teaching myself HTML, CSS, Flash, Actionscript and PHP. In 2007 I became employed as a web developer which soon became a career that I found creative and that I had a passion for. I enjoy the challenges and sense of fulfilment that computer programming gives. I try to stay up-to-date with new technologies and learn how they could help me with my current and up-coming projects. I appreciate how code should be written to ensure efficient use and debugging.</p>
 
     <h2>Experience</h2>
@@ -529,23 +554,51 @@
     My responsibilities in employment have ranged from creating secure systems to fulfilling my role as 'Technical Support Manager' at conference events where I set up the registration area with a Linux server and laptops and assist speakers with their presentations.</p>
     <p>I have been programming for nine years and employed as a web developer for more than five. Throughout this time I have used PHP, CakePHP and MySQL as the primary programming languages to produce such systems as:</p>
     <ul>
-      <li>Data management, email marketing and surveys tool that has sold to clients such as IBM, Oracle and Xerox</li>
-      <li>Client and order management systems, including an online booking form</li>
-      <li>Corporate websites</li>
-      <li>Numerous conference promotion websites</li>
+      <li>
+        <span>Data management, email marketing and surveys tool that has sold to clients such as IBM, Oracle and Xerox</span>
+      </li>
+      <li>
+        <span>Client and order management systems, including an online booking form</span>
+      </li>
+      <li>
+        <span>Corporate websites</span>
+      </li>
+      <li>
+        <span>Numerous conference promotion websites</span>
+      </li>
     </ul>
     <p>I have experience with the following programming languages:</p>
     <ul>
-      <li>ActionScript</li>
-      <li>CakePHP</li>
-      <li>CSS</li>
-      <li>HTML</li>
-      <li>JavaScript</li>
-      <li>jQuery</li>
-      <li>Lithium</li>
-      <li>MongoDB</li>
-      <li>MySQL</li>
-      <li>PHP</li>
+      <li>
+        <span>ActionScript</span>
+      </li>
+      <li>
+        <span>CakePHP</span>
+      </li>
+      <li>
+        <span>CSS</span>
+      </li>
+      <li>
+        <span>HTML</span>
+      </li>
+      <li>
+        <span>JavaScript</span>
+      </li>
+      <li>
+        <span>jQuery</span>
+      </li>
+      <li>
+        <span>Lithium</span>
+      </li>
+      <li>
+        <span>MongoDB</span>
+      </li>
+      <li>
+        <span>MySQL</span>
+      </li>
+      <li>
+        <span>PHP</span>
+      </li>
     </ul>
     <p>I am also currently researching Perl, Objective-C and Node.js.</p>
     <p>Some everyday applications:</p>
@@ -570,21 +623,43 @@
     <div class="row">
       <div class="col-sm">
         <ul>
-          <li>AS Engineering</li>
-          <li>AS Music Technology</li>
-          <li>GCSE Mathematics grade B</li>
-          <li>GCSE Science Double Award grades C, C</li>
-          <li>GCSE English grade C</li>
-          <li>GCSE Art and Design grade C</li>
+          <li>
+            <span>AS Engineering</span>
+          </li>
+          <li>
+            <span>AS Music Technology</span>
+          </li>
+          <li>
+            <span>GCSE Mathematics grade B</span>
+          </li>
+          <li>
+            <span>GCSE Science Double Award grades C, C</span>
+          </li>
+          <li>
+            <span>GCSE English grade C</span>
+          </li>
+          <li>
+            <span>GCSE Art and Design grade C</span>
+          </li>
         </ul>
       </div>
       <div class="col-sm">
         <ul>
-          <li>GCSE English Literature grade D</li>
-          <li>GCSE German grade D</li>
-          <li>GCSE Information and Communication Technology grade D</li>
-          <li>GCSE Engineering Double Award grade D, D</li>
-          <li>GCSE Geography grade E</li>
+          <li>
+            <span>GCSE English Literature grade D</span>
+          </li>
+          <li>
+            <span>GCSE German grade D</span>
+          </li>
+          <li>
+            <span>GCSE Information and Communication Technology grade D</span>
+          </li>
+          <li>
+            <span>GCSE Engineering Double Award grade D, D</span>
+          </li>
+          <li>
+            <span>GCSE Geography grade E</span>
+          </li>
         </ul>
       </div>
     </div>
