@@ -38,8 +38,7 @@
       });
 
       // Mimic hover of logos on touch devices
-      $('.img-logo').bind('touchstart touchend', function(e) {
-        e.preventDefault();
+      $('.img-logo').bind('touchstart touchend', function() {
         $(this).toggleClass('hover');
       });
 
