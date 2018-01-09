@@ -4,7 +4,7 @@
   max-height: 50px;
   transition-duration: 0.5s;
   filter: grayscale(100%);
-  &:hover {
+  &:hover, &.hover {
     transform: rotate(-2deg) scale(1.05, 1.05);
     filter: none;
   }

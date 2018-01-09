@@ -37,6 +37,13 @@
         }, index * 300);
       });
 
+      // Mimic hover of logos on touch devices
+      $('.img-logo').bind('touchstart touchend', function(e) {
+        e.preventDefault();
+        $(this).toggleClass('hover');
+      });
+
+      // Scroll events
       $(window).scroll(function() {
         var scrollTop = $(window).scrollTop();
         var night = scrollTop > 0 && scrollTop > $('header').height() - ($(window).height() / 2);
