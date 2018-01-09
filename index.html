@@ -39,13 +39,13 @@
 
       $(window).scroll(function() {
         var scrollTop = $(window).scrollTop();
-        var nightThreshold = $('header').height() - ($(window).height() / 2);
-        var moonThreshold = $(document).height() - $(window).height() - ($('footer').height() / 2);
-        if (scrollTop > 0 && scrollTop > nightThreshold) {
+        var night = scrollTop > 0 && scrollTop > $('header').height() - ($(window).height() / 2);
+        var moonRise = scrollTop >= $(document).height() - $(window).height() || scrollTop > $(document).height() - $('footer').height() - ($(window).height() / 2);
+        if (night) {
           if (!$('body').hasClass('night')) {
             $('body').addClass('night');
           }
-          if (scrollTop > moonThreshold) {
+          if (moonRise) {
             if (!$('#Moon').hasClass('rise')) {
               $('#Moon').addClass('rise');
             }
