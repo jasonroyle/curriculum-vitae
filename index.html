@@ -38,9 +38,19 @@
       });
 
       $(window).scroll(function() {
-        if ($(window).scrollTop() > 300) {
+        var scrollTop = $(window).scrollTop();
+        var nightThreshold = $('header').height() - ($(window).height() / 2);
+        var moonThreshold = $(document).height() - $(window).height() - ($('footer').height() / 2);
+        if (scrollTop > 0 && scrollTop > nightThreshold) {
           if (!$('body').hasClass('night')) {
             $('body').addClass('night');
+          }
+          if (scrollTop > moonThreshold) {
+            if (!$('#Moon').hasClass('rise')) {
+              $('#Moon').addClass('rise');
+            }
+          } else if ($('#Moon').hasClass('rise')) {
+            $('#Moon').removeClass('rise');
           }
         } else if ($('body').hasClass('night')) {
           $('body').removeClass('night');
@@ -51,41 +61,39 @@
 </head>
 <body>
 
-  <div id="Sky">
+  <header>
 
     <div
       id="NightSky"
-      class="light"
+      class="visible-night"
     ></div>
-    <div id="Sun">
-      <div
-        id="NightSun"
-        class="light"
-      ></div>
-    </div>
-
-    <!-- Header -->
-    <header>
-      <div class="container">
-        <h1>
-          <span class="font-caveat">
-            Jason Royle
-          </span>
-          <span class="float-right">
-            <span class="d-inline d-md-none">
-              <abbr title="Curriculum Vitae">
-                CV
-              </abbr>
-            </span>
-            <span class="d-none d-md-inline">
-              Curriculum Vitae
-            </span>
-          </span>
-        </h1>
-      </div>
-    </header>
+    <div
+      id="Sun"
+      class="visible-day"
+    ></div>
+    <div
+      id="Haze"
+      class="visible-night"
+    ></div>
 
     <div class="container">
+
+      <h1>
+        <span class="font-caveat">
+          Jason Royle
+        </span>
+        <span class="float-right">
+          <span class="d-inline d-md-none">
+            <abbr title="Curriculum Vitae">
+              CV
+            </abbr>
+          </span>
+          <span class="d-none d-md-inline">
+            Curriculum Vitae
+          </span>
+        </span>
+      </h1>
+
       <div class="row">
         <div class="col-sm-3 col-lg-2">
           <address>
@@ -125,7 +133,7 @@
         </div>
       </div>
 
-      <div class="card silhouette">
+      <div class="card">
         <div class="card-body">
           <dl class="row align-items-center skills">
 
@@ -540,130 +548,154 @@
       </div>
 
     </div>
-  </div>
 
-  <div
-    id="Terminal"
-    class="container light-flicker"
-  >
-    <p>I began web development as a hobby at the age of 15, teaching myself HTML, CSS, Flash, Actionscript and PHP. In 2007 I became employed as a web developer which soon became a career that I found creative and that I had a passion for. I enjoy the challenges and sense of fulfilment that computer programming gives. I try to stay up-to-date with new technologies and learn how they could help me with my current and up-coming projects. I appreciate how code should be written to ensure efficient use and debugging.</p>
+  </header>
 
-    <h2>Experience</h2>
-    <p>Most of my projects have been created using CakePHP, an object-orientated and MVC based PHP framework. I have started to develop new projects in the Lithium framework, which is similar to CakePHP but built upon PHP version 5.4 or greater. Together with Lithium I use a no-SQL, document based database system called MongoDB. All my projects are under git version control.</p>
-    <p>I currently have two VPS servers that I have setup and configured myself, which both run CentOS and have iptables, postfix, httpd, php, mysql and mongodb services running.
-    My responsibilities in employment have ranged from creating secure systems to fulfilling my role as 'Technical Support Manager' at conference events where I set up the registration area with a Linux server and laptops and assist speakers with their presentations.</p>
-    <p>I have been programming for nine years and employed as a web developer for more than five. Throughout this time I have used PHP, CakePHP and MySQL as the primary programming languages to produce such systems as:</p>
-    <ul>
-      <li>
-        <span>Data management, email marketing and surveys tool that has sold to clients such as IBM, Oracle and Xerox</span>
-      </li>
-      <li>
-        <span>Client and order management systems, including an online booking form</span>
-      </li>
-      <li>
-        <span>Corporate websites</span>
-      </li>
-      <li>
-        <span>Numerous conference promotion websites</span>
-      </li>
-    </ul>
-    <p>I have experience with the following programming languages:</p>
-    <ul>
-      <li>
-        <span>ActionScript</span>
-      </li>
-      <li>
-        <span>CakePHP</span>
-      </li>
-      <li>
-        <span>CSS</span>
-      </li>
-      <li>
-        <span>HTML</span>
-      </li>
-      <li>
-        <span>JavaScript</span>
-      </li>
-      <li>
-        <span>jQuery</span>
-      </li>
-      <li>
-        <span>Lithium</span>
-      </li>
-      <li>
-        <span>MongoDB</span>
-      </li>
-      <li>
-        <span>MySQL</span>
-      </li>
-      <li>
-        <span>PHP</span>
-      </li>
-    </ul>
-    <p>I am also currently researching Perl, Objective-C and Node.js.</p>
-    <p>Some everyday applications:</p>
+  <main>
+    <div class="container">
 
-    <h2>Employment History</h2>
-    <h3>
-      Ingenium IDS
-      <span>
-        2007 to '15
-      </span>
-    </h3>
-    <p>I began my career as a web developer at Ingenium IDS programming in </p>
-    <h3>
-      Synextra
-      <span>
-        2015 to present
-      </span>
-    </h3>
-    <p></p>
+      <p>I began web development as a hobby at the age of 15, teaching myself HTML, CSS, Flash, Actionscript and PHP. In 2007 I became employed as a web developer which soon became a career that I found creative and that I had a passion for. I enjoy the challenges and sense of fulfilment that computer programming gives. I try to stay up-to-date with new technologies and learn how they could help me with my current and up-coming projects. I appreciate how code should be written to ensure efficient use and debugging.</p>
 
-    <h2>Qualifications</h2>
-    <div class="row">
-      <div class="col-sm">
-        <ul>
-          <li>
-            <span>AS Engineering</span>
-          </li>
-          <li>
-            <span>AS Music Technology</span>
-          </li>
-          <li>
-            <span>GCSE Mathematics grade B</span>
-          </li>
-          <li>
-            <span>GCSE Science Double Award grades C, C</span>
-          </li>
-          <li>
-            <span>GCSE English grade C</span>
-          </li>
-          <li>
-            <span>GCSE Art and Design grade C</span>
-          </li>
-        </ul>
+      <h2>Experience</h2>
+      <p>Most of my projects have been created using CakePHP, an object-orientated and MVC based PHP framework. I have started to develop new projects in the Lithium framework, which is similar to CakePHP but built upon PHP version 5.4 or greater. Together with Lithium I use a no-SQL, document based database system called MongoDB. All my projects are under git version control.</p>
+      <p>I currently have two VPS servers that I have setup and configured myself, which both run CentOS and have iptables, postfix, httpd, php, mysql and mongodb services running.
+      My responsibilities in employment have ranged from creating secure systems to fulfilling my role as 'Technical Support Manager' at conference events where I set up the registration area with a Linux server and laptops and assist speakers with their presentations.</p>
+      <p>I have been programming for nine years and employed as a web developer for more than five. Throughout this time I have used PHP, CakePHP and MySQL as the primary programming languages to produce such systems as:</p>
+      <ul>
+        <li>
+          <span>Data management, email marketing and surveys tool that has sold to clients such as IBM, Oracle and Xerox</span>
+        </li>
+        <li>
+          <span>Client and order management systems, including an online booking form</span>
+        </li>
+        <li>
+          <span>Corporate websites</span>
+        </li>
+        <li>
+          <span>Numerous conference promotion websites</span>
+        </li>
+      </ul>
+      <p>I have experience with the following programming languages:</p>
+      <ul>
+        <li>
+          <span>ActionScript</span>
+        </li>
+        <li>
+          <span>CakePHP</span>
+        </li>
+        <li>
+          <span>CSS</span>
+        </li>
+        <li>
+          <span>HTML</span>
+        </li>
+        <li>
+          <span>JavaScript</span>
+        </li>
+        <li>
+          <span>jQuery</span>
+        </li>
+        <li>
+          <span>Lithium</span>
+        </li>
+        <li>
+          <span>MongoDB</span>
+        </li>
+        <li>
+          <span>MySQL</span>
+        </li>
+        <li>
+          <span>PHP</span>
+        </li>
+      </ul>
+      <p>I am also currently researching Perl, Objective-C and Node.js.</p>
+      <p>Some everyday applications:</p>
+
+      <h2>Employment History</h2>
+      <h3>
+        Ingenium IDS
+        <span>
+          2007 to '15
+        </span>
+      </h3>
+      <p>I began my career as a web developer at Ingenium IDS programming in </p>
+      <h3>
+        Synextra
+        <span>
+          2015 to present
+        </span>
+      </h3>
+      <p></p>
+
+      <h2>Qualifications</h2>
+      <div class="row">
+        <div class="col-sm">
+          <ul>
+            <li>
+              <span>AS Engineering</span>
+            </li>
+            <li>
+              <span>AS Music Technology</span>
+            </li>
+            <li>
+              <span>GCSE Mathematics grade B</span>
+            </li>
+            <li>
+              <span>GCSE Science Double Award grades C, C</span>
+            </li>
+            <li>
+              <span>GCSE English grade C</span>
+            </li>
+            <li>
+              <span>GCSE Art and Design grade C</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm">
+          <ul>
+            <li>
+              <span>GCSE English Literature grade D</span>
+            </li>
+            <li>
+              <span>GCSE German grade D</span>
+            </li>
+            <li>
+              <span>GCSE Information and Communication Technology grade D</span>
+            </li>
+            <li>
+              <span>GCSE Engineering Double Award grade D, D</span>
+            </li>
+            <li>
+              <span>GCSE Geography grade E</span>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="col-sm">
-        <ul>
-          <li>
-            <span>GCSE English Literature grade D</span>
-          </li>
-          <li>
-            <span>GCSE German grade D</span>
-          </li>
-          <li>
-            <span>GCSE Information and Communication Technology grade D</span>
-          </li>
-          <li>
-            <span>GCSE Engineering Double Award grade D, D</span>
-          </li>
-          <li>
-            <span>GCSE Geography grade E</span>
-          </li>
-        </ul>
+
+    </div>
+  </main>
+
+  <footer>
+
+    <div
+      id="Moon"
+      class="visible-night"
+    >
+      <div class="crater"></div>
+      <div class="crater"></div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-6">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In imperdiet, ipsum vestibulum volutpat elementum, turpis eros tristique ante, in vehicula risus turpis quis nunc. Proin sagittis, tellus a faucibus lacinia, urna ligula euismod quam, sed porta massa elit at sapien. Quisque ultricies est at nisl egestas maximus. Vestibulum eu neque ut est congue elementum sed eu dui. Aliquam bibendum placerat diam quis viverra. Sed sodales sagittis felis, in aliquet lectus feugiat dictum. Nullam aliquet, quam sit amet imperdiet posuere, lorem sapien dignissim nulla, vitae posuere dui leo eget mauris. Ut semper molestie lectus, et posuere neque. Nulla elementum aliquam felis, ac lobortis purus interdum vitae. Aliquam sed auctor nisi, ut fringilla est.
+          </p>
+        </div>
       </div>
     </div>
 
-  </div>
+  </footer>
+
 </body>
 </html>

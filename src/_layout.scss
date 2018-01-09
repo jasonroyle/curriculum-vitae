@@ -1,137 +1,188 @@
-#Sky {
-  @include clip-path(polygon(0% 0%, 100% 0%, 100% 100%, 38% 92%, 30% 95%, 24% 90%, 0% 100%));
-  margin: 0 0 60px;
-  padding: 0 0 120px;
+/**
+ * Defaults
+ */
+h1 {
+  margin: 20px 0;
+}
+
+h2 {
+  color: #e45649;
+}
+
+h3 {
+  color: #986801;
+}
+
+li {
+  color: #50a14f;
+
+  span {
+    color: #4078f2;
+  }
+}
+
+header, footer {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
   color: #fff;
-  header {
-    padding: 20px 0;
+
+  a {
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
   }
-  .card {
-    padding: 0 0 -16px;
-    border: none;
-    box-shadow: inset 0 0 5px #ccc;
+}
+
+header, main {
+  padding-bottom: 150px;
+}
+
+main, footer {
+  margin-top: -120px;
+  padding-top: 150px;
+}
+
+header {
+  background: linear-gradient(#2e6ae2, #8ac6e8 90%, #e3c1ed);
+}
+
+main {
+  @include clip-path(polygon(0% 120px, 22% 0%, 30% 50px, 38% 20px, 100% 120px, 100% 100%, 0% 100%));
+  background-color: #fff;
+}
+
+footer {
+  @include clip-path(polygon(0% 120px, 70% 0%, 100% 120px, 100% 100%, 0% 100%));
+  background: linear-gradient(#4c5568, #002244);
+}
+
+#NightSky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#002244, #400048, #bd2b00);
+}
+
+#Sun, #Haze {
+  position: absolute;
+  bottom: -350px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+}
+
+#Sun {
+  background: radial-gradient(circle, #fffeee, #fffecc 27%, rgba(255, 254, 204, 0) 28%, rgba(255, 254, 204, 0.1) 47%, rgba(255, 254, 204, 0) 50%);
+}
+
+#Haze {
+  background: radial-gradient(#ff8c7c, rgba(255, 140, 124, 0) 50%);
+}
+
+#Moon {
+  position: absolute;
+  top: -350px;
+  left: -340px;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, #fff, #fff 5.9%, rgba(200, 200, 200, 0) 6%, rgba(200, 200, 200, 0) 44%, rgba(255, 255, 255, 0.1) 47%, rgba(255, 255, 255, 0) 50%);
+
+  &.rise {
+    top: -220px;
   }
+
+  div {
+    position: absolute;
+    background: radial-gradient(circle, rgba(216, 216, 216, 0) 30%, #d8d8d8 48%, rgba(216, 216, 216, 0) 50%);
+
+    &:nth-child(1) {
+      width: 3%;
+      height: 3%;
+      top: 50%;
+      left: 50%;
+    }
+
+    &:nth-child(2) {
+      width: 1.5%;
+      height: 1.5%;
+      top: 49%;
+      left: 52%;
+    }
+  }
+}
+
+.card {
+  padding: 0 0 -16px;
+  border: none;
+  box-shadow: inset 0 0 5px #ccc;
 }
 
 .skills {
   margin-bottom: 0;
+
   dt, dd {
     margin-bottom: 16px;
   }
 }
 
-@keyframes light-flicker-on {
-  from: {
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.2;
-  }
-  20% {
-    opacity: 0.4;
-  }
-  30% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  70% {
-    opacity: 0;
-  }
-  80% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0;
-  }
-  to: {
-    opacity: 1;
-  }
+.visible-day {
+  opacity: 1;
 }
 
-body, #Sun, #NightSun, .light, .silhouette, .silhouette > * {
+.visible-night {
+  opacity: 0;
+}
+
+/**
+ * Night
+ */
+main, .visible-day, .visible-night {
   transition-duration: 2s;
 }
-.light-flicker {
-  transition-delay: 0.8s;
-  transition-duration: 0.1s;
-}
 
-body {
-  #Sky {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(0deg, #e3c1ed, #8ac6e8 10%, #2e6ae2);
-    #NightSky {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(0deg, #3b3c1a, #212f38 10%, #071023);
+.night {
+  main {
+    color: #abb0bf;
+    background-color: #282c34;
+
+    h2 {
+      color: #e06c75;
     }
-    #Sun {
-      position: absolute;
-      top: -350px;
-      right: 0;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #fffefe, #fffeb0 20%, rgba(255, 254, 176, 0) 28%, rgba(255, 254, 176, 0.1) 47%, rgba(255, 254, 176, 0) 50%);
-      transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      #NightSun {
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle, #ff8c7c, #e0c094 20%, rgba(255, 254, 176, 0) 28%);
+
+    h3 {
+      color: #d19a66;
+    }
+
+    li {
+      color: #98c379;
+
+      span {
+        color: #61afef;
       }
     }
   }
-  #Terminal {
-    color: #abb2bf;
-    font-family: 'Courier New', 'Courier', 'VT323', monospace;
+
+  #Sun {
+    bottom: -480px;
   }
-  .light, .light-flicker {
+
+  #Haze {
+    bottom: -350px;
+    right: -50%;
+    width: 200%;
+  }
+
+  .visible-day {
     opacity: 0;
   }
-  &.night {
-    background-color: #000;
-    #Sky {
-      #Sun {
-        top: 100%;
-        right: -300px;
-        width: 600px;
-        height: 600px;
-      }
-    }
-    .silhouette {
-      background-color: #000;
-      box-shadow: none !important;
-      > * {
-        opacity: 0;
-      }
-    }
-    .light, .light-flicker {
-      opacity: 1;
-    }
-    .light-flicker {
-      animation-delay: 1s;
-      animation-duration: 0.5s;
-      animation-name: light-flicker-on;
-    }
-  }
-}
 
-h2 {
-  color: #e06c75;
-}
-h3 {
-  color: #d19a66;
-}
-ul {
-  li {
-    color: #98c379;
-    span {
-      color: #61afef;
-    }
+  .visible-night {
+    opacity: 1;
   }
 }

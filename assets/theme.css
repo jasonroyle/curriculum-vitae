@@ -62,11 +62,11 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #383a42;
   text-align: left;
   background-color: #fff; }
 
@@ -2053,7 +2053,7 @@ tbody.collapse.show {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #212529;
+  color: #383a42;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -3397,7 +3397,7 @@ tbody.collapse.show {
     text-decoration: none;
     background-color: #f8f9fa; }
   .list-group-item-action:active {
-    color: #212529;
+    color: #383a42;
     background-color: #e9ecef; }
 
 .list-group-item {
@@ -3717,7 +3717,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -3802,7 +3802,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -3920,7 +3920,7 @@ button.close {
 
 .popover-body {
   padding: 0.5rem 0.75rem;
-  color: #212529; }
+  color: #383a42; }
 
 .carousel {
   position: relative; }
@@ -6019,106 +6019,142 @@ a.text-dark:focus, a.text-dark:hover {
     transform: rotate(-2deg) scale(1.05, 1.05);
     filter: none; }
 
-#Sky {
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 38% 92%, 30% 95%, 24% 90%, 0% 100%);
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 38% 92%, 30% 95%, 24% 90%, 0% 100%);
-  margin: 0 0 60px;
-  padding: 0 0 120px;
+/**
+ * Defaults
+ */
+h1 {
+  margin: 20px 0; }
+
+h2 {
+  color: #e45649; }
+
+h3 {
+  color: #986801; }
+
+li {
+  color: #50a14f; }
+  li span {
+    color: #4078f2; }
+
+header, footer {
+  position: relative;
+  overflow: hidden;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
   color: #fff; }
-  #Sky header {
-    padding: 20px 0; }
-  #Sky .card {
-    padding: 0 0 -16px;
-    border: none;
-    box-shadow: inset 0 0 5px #ccc; }
+  header a, footer a {
+    color: #fff; }
+    header a:hover, footer a:hover {
+      color: #fff; }
+
+header, main {
+  padding-bottom: 150px; }
+
+main, footer {
+  margin-top: -120px;
+  padding-top: 150px; }
+
+header {
+  background: linear-gradient(#2e6ae2, #8ac6e8 90%, #e3c1ed); }
+
+main {
+  -webkit-clip-path: polygon(0% 120px, 22% 0%, 30% 50px, 38% 20px, 100% 120px, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 120px, 22% 0%, 30% 50px, 38% 20px, 100% 120px, 100% 100%, 0% 100%);
+  background-color: #fff; }
+
+footer {
+  -webkit-clip-path: polygon(0% 120px, 70% 0%, 100% 120px, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 120px, 70% 0%, 100% 120px, 100% 100%, 0% 100%);
+  background: linear-gradient(#4c5568, #002244); }
+
+#NightSky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#002244, #400048, #bd2b00); }
+
+#Sun, #Haze {
+  position: absolute;
+  bottom: -350px;
+  right: -200px;
+  width: 700px;
+  height: 700px; }
+
+#Sun {
+  background: radial-gradient(circle, #fffeee, #fffecc 27%, rgba(255, 254, 204, 0) 28%, rgba(255, 254, 204, 0.1) 47%, rgba(255, 254, 204, 0) 50%); }
+
+#Haze {
+  background: radial-gradient(#ff8c7c, rgba(255, 140, 124, 0) 50%); }
+
+#Moon {
+  position: absolute;
+  top: -350px;
+  left: -340px;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, #fff, #fff 5.9%, rgba(200, 200, 200, 0) 6%, rgba(200, 200, 200, 0) 44%, rgba(255, 255, 255, 0.1) 47%, rgba(255, 255, 255, 0) 50%); }
+  #Moon.rise {
+    top: -220px; }
+  #Moon div {
+    position: absolute;
+    background: radial-gradient(circle, rgba(216, 216, 216, 0) 30%, #d8d8d8 48%, rgba(216, 216, 216, 0) 50%); }
+    #Moon div:nth-child(1) {
+      width: 3%;
+      height: 3%;
+      top: 50%;
+      left: 50%; }
+    #Moon div:nth-child(2) {
+      width: 1.5%;
+      height: 1.5%;
+      top: 49%;
+      left: 52%; }
+
+.card {
+  padding: 0 0 -16px;
+  border: none;
+  box-shadow: inset 0 0 5px #ccc; }
 
 .skills {
   margin-bottom: 0; }
   .skills dt, .skills dd {
     margin-bottom: 16px; }
 
-@keyframes light-flicker-on {
-  from-opacity: 0;
-  10% {
-    opacity: 0.2; }
-  20% {
-    opacity: 0.4; }
-  30% {
-    opacity: 0; }
-  50% {
-    opacity: 0.5; }
-  70% {
-    opacity: 0; }
-  80% {
-    opacity: 1; }
-  90% {
-    opacity: 0; }
-  to-opacity: 1; }
+.visible-day {
+  opacity: 1; }
 
-body, #Sun, #NightSun, .light, .silhouette, .silhouette > * {
-  transition-duration: 2s; }
-
-.light-flicker {
-  transition-delay: 0.8s;
-  transition-duration: 0.1s; }
-
-body #Sky {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(0deg, #e3c1ed, #8ac6e8 10%, #2e6ae2); }
-  body #Sky #NightSky {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, #3b3c1a, #212f38 10%, #071023); }
-  body #Sky #Sun {
-    position: absolute;
-    top: -350px;
-    right: 0;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, #fffefe, #fffeb0 20%, rgba(255, 254, 176, 0) 28%, rgba(255, 254, 176, 0.1) 47%, rgba(255, 254, 176, 0) 50%);
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    body #Sky #Sun #NightSun {
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, #ff8c7c, #e0c094 20%, rgba(255, 254, 176, 0) 28%); }
-
-body #Terminal {
-  color: #abb2bf;
-  font-family: 'Courier New', 'Courier', 'VT323', monospace; }
-
-body .light, body .light-flicker {
+.visible-night {
   opacity: 0; }
 
-body.night {
-  background-color: #000; }
-  body.night #Sky #Sun {
-    top: 100%;
-    right: -300px;
-    width: 600px;
-    height: 600px; }
-  body.night .silhouette {
-    background-color: #000;
-    box-shadow: none !important; }
-    body.night .silhouette > * {
-      opacity: 0; }
-  body.night .light, body.night .light-flicker {
-    opacity: 1; }
-  body.night .light-flicker {
-    animation-delay: 1s;
-    animation-duration: 0.5s;
-    animation-name: light-flicker-on; }
+/**
+ * Night
+ */
+main, .visible-day, .visible-night {
+  transition-duration: 2s; }
 
-h2 {
-  color: #e06c75; }
+.night main {
+  color: #abb0bf;
+  background-color: #282c34; }
+  .night main h2 {
+    color: #e06c75; }
+  .night main h3 {
+    color: #d19a66; }
+  .night main li {
+    color: #98c379; }
+    .night main li span {
+      color: #61afef; }
 
-h3 {
-  color: #d19a66; }
+.night #Sun {
+  bottom: -480px; }
 
-ul li {
-  color: #98c379; }
-  ul li span {
-    color: #61afef; }
+.night #Haze {
+  bottom: -350px;
+  right: -50%;
+  width: 200%; }
+
+.night .visible-day {
+  opacity: 0; }
+
+.night .visible-night {
+  opacity: 1; }
