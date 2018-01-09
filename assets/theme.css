@@ -6091,7 +6091,7 @@ footer {
 #Moon {
   position: absolute;
   top: -350px;
-  left: -340px;
+  left: -350px;
   width: 900px;
   height: 900px;
   background: radial-gradient(circle, #fff, #fff 5.9%, rgba(200, 200, 200, 0) 6%, rgba(200, 200, 200, 0) 44%, rgba(255, 255, 255, 0.1) 47%, rgba(255, 255, 255, 0) 50%); }
