@@ -6065,6 +6065,7 @@ main {
 footer {
   -webkit-clip-path: polygon(0% 120px, 70% 0%, 100% 120px, 100% 100%, 0% 100%);
   clip-path: polygon(0% 120px, 70% 0%, 100% 120px, 100% 100%, 0% 100%);
+  padding-bottom: 54px;
   background: linear-gradient(#4c5568, #002244); }
 
 #NightSky {
@@ -6120,6 +6121,10 @@ footer {
   margin-bottom: 0; }
   .skills dt, .skills dd {
     margin-bottom: 16px; }
+
+.social a {
+  font-size: 60px;
+  padding: 10px 0; }
 
 .visible-day {
   opacity: 1; }
