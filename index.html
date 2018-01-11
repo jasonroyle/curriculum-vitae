@@ -46,7 +46,7 @@
       $(window).scroll(function() {
         var scrollTop = $(window).scrollTop();
         var night = scrollTop > 0 && scrollTop > $('header').height() - ($(window).height() / 2);
-        var moonRise = scrollTop >= $(document).height() - $(window).height() || scrollTop > $(document).height() - $('footer').height() - ($(window).height() / 2);
+        var moonRise = scrollTop + $(window).height() > $(document).height() - ($('footer').height() / 2);
         if (night) {
           if (!$('body').hasClass('night')) {
             $('body').addClass('night');
