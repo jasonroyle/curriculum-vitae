@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Jason Royle - CV</title>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  >
+  <link
+    rel="stylesheet"
+    href="assets/theme.css"
+  >
+  <link
+    rel="stylesheet"
+    href="assets/fonts/black-tie/css/black-tie.min.css"
+  >
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script>
+    $(function() {
+
+      // Enable tooltips
+      $('[data-toggle="tooltip"]').tooltip({
+        delay: {
+          show: 1000,
+          hide: 100
+        }
+      });
+
+      // Animate progress bars
+      $('.skills .progress-bar').each(function(index) {
+        var elem = $(this);
+        setTimeout(function() {
+          elem.animate({ width: elem.attr('aria-valuenow') + '%' }, 200, 'linear');
+        }, index * 300);
+      });
+
+      // Mimic hover of logos on touch devices
+      $('.img-logo').bind('touchstart touchend', function() {
+        $(this).toggleClass('hover');
+      });
+
+      // Scroll events
+      $(window).scroll(function() {
+        var scrollTop = $(window).scrollTop();
+        var night = scrollTop > 0 && scrollTop > $('header').height() - ($(window).height() / 2);
+        var moonRise = scrollTop + $(window).height() > $(document).height() - ($('footer').height() / 2);
+        if (night) {
+          if (!$('body').hasClass('night')) {
+            $('body').addClass('night');
+          }
+          if (moonRise) {
+            if (!$('#Moon').hasClass('rise')) {
+              $('#Moon').addClass('rise');
+            }
+          } else if ($('#Moon').hasClass('rise')) {
+            $('#Moon').removeClass('rise');
+          }
+        } else if ($('body').hasClass('night')) {
+          $('body').removeClass('night');
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <header>
+
+    <div
+      id="NightSky"
+      class="visible-night"
+    ></div>
+    <div
+      id="Sun"
+      class="visible-day"
+    ></div>
+    <div
+      id="Haze"
+      class="visible-night"
+    ></div>
+
+    <div class="container">
+
+      <h1>
+        <span class="font-caveat">
+          Jason Royle
+        </span>
+        <span class="float-right">
+          <span class="d-inline d-md-none">
+            <abbr title="Curriculum Vitae">
+              CV
+            </abbr>
+          </span>
+          <span class="d-none d-md-inline">
+            Curriculum Vitae
+          </span>
+        </span>
+      </h1>
+
+      <div class="row align-items-center">
+
+        <div class="col-8 col-md-4">
+          <dl class="row">
+            <dt class="col-2">
+              <i class="bts bt-map-marker"></i>
+              <span class="sr-only">Location</span>
+            </dt>
+            <dd class="col-10">Glossop, Derbyshire</dd>
+            <dt class="col-2">
+              <i class="bts bt-gift"></i>
+              <span class="sr-only">Date of Birth</span>
+            </dt>
+            <dd class="col-10">31st March 1988</dd>
+            <dt class="col-2">
+              <i class="bts bt-phone"></i>
+              <span class="sr-only">Telephone Number</span>
+            </dt>
+            <dd class="col-10">
+              <a href="tel:+447912412407">
+                07912412407
+              </a>
+            </dd>
+            <dt class="col-2">
+              <i class="bts bt-envelope"></i>
+              <span class="sr-only">Email Address</span>
+            </dt>
+            <dd class="col-10">
+              <a href="mailto:jasonroyle@me.com">
+                jasonroyle@me.com
+              </a>
+            </dd>
+          </dl>
+        </div>
+
+        <div class="col-4 col-md-8">
+          <div class="row social">
+
+            <div class="col-md-6 text-center">
+              <a
+                href="https://github.com/jasonroyle"
+                target="_blank"
+              >
+                <i class="fab fab-github"></i>
+              </a>
+            </div>
+
+            <div class="col-md-6 text-center">
+              <a
+                href="https://www.linkedin.com/in/jason-royle-a18b4589/"
+                target="_blank"
+              >
+                <i class="fab fab-linkedin"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <dl class="row align-items-center skills">
+
+            <!-- Angular -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://angular.io"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/angular.svg"
+                  alt="Angular"
+                  data-toggle="tooltip"
+                  title="Angular"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Ansible -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.ansible.com"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/ansible.svg"
+                  alt="Ansible"
+                  data-toggle="tooltip"
+                  title="Ansible"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Apache HTTP Server -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://httpd.apache.org"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/apache.svg"
+                  alt="Apache HTTP Server"
+                  data-toggle="tooltip"
+                  title="Apache HTTP Server"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- CakePHP -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://cakephp.org"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/cakephp.png"
+                  alt="CakePHP"
+                  data-toggle="tooltip"
+                  title="CakePHP"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- HTML -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.w3.org/html/"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/html.svg"
+                  alt="HTML"
+                  data-toggle="tooltip"
+                  title="HTML"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Li₃ -->
+            <dt class="col-sm-3 col-md-2 text-center">
+              <a
+                href="http://li3.me"
+                target="_blank"
+                class="align-middle"
+              >
+                <img
+                  src="assets/images/li3.png"
+                  alt="Li₃"
+                  data-toggle="tooltip"
+                  title="Li₃"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="90"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- MongoDB -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.mongodb.com"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/mongodb.png"
+                  alt="MongoDB"
+                  data-toggle="tooltip"
+                  title="MongoDB"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- MySQL -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.mysql.com"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/mysql.png"
+                  alt="MySQL"
+                  data-toggle="tooltip"
+                  title="MySQL"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- NGINX -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://nginx.org/en/"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/nginx.svg"
+                  alt="NGINX"
+                  data-toggle="tooltip"
+                  title="NGINX"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Node.js -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://nodejs.org"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/nodejs.png"
+                  alt="Node.js"
+                  data-toggle="tooltip"
+                  title="Node.js"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- PHP -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="http://php.net"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/php.png"
+                  alt="PHP"
+                  data-toggle="tooltip"
+                  title="PHP"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Python -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.python.org"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/python.svg"
+                  alt="Python"
+                  data-toggle="tooltip"
+                  title="Python"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  aria-valuenow="50"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- RabbitMQ -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.rabbitmq.com"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/rabbitmq.png"
+                  alt="RabbitMQ"
+                  data-toggle="tooltip"
+                  title="RabbitMQ / AMQP"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- Sass -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="http://sass-lang.com"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/sass.png"
+                  alt="Sass"
+                  data-toggle="tooltip"
+                  title="Sass"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+            <!-- TypeScript -->
+            <dt class="col-sm-3 col-md-2">
+              <a
+                href="https://www.typescriptlang.org"
+                target="_blank"
+              >
+                <img
+                  src="assets/images/typescript.svg"
+                  alt="TypeScript"
+                  data-toggle="tooltip"
+                  title="TypeScript"
+                  class="img-fluid img-logo"
+                >
+              </a>
+            </dt>
+            <dd class="col-sm-9 col-md-4 col-xl-2">
+              <div class="progress">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </dd>
+
+          </dl>
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+  <main>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md">
+          <p>
+            I began web development as a hobby at the age of 15, teaching myself everything I needed to know to build engaging and interactive websites and forums. In 2007 I became employed as a web developer which soon became a career that I found creative and that I had a great passion for. My position, roles and responsibilities evolved over 8 years until 2015 when I progressed my career further and became the lead software developer for a startup IT company.
+          </p>
+        </div>
+        <div class="col-md">
+          <p>
+            I really enjoy the challenges and sense of fulfilment that software development provides. Keeping up-to-date with new technologies and processes to learn how they could help with current and up-coming projects increases my knowledge and skill set continuously. I strongly push for projects and their infrastructures to be efficient, scalable and intuitive to the best of my ability.
+          </p>
+        </div>
+      </div>
+
+      <h2>Experience</h2>
+      <h3>
+        Ingenium IDS
+        <span>
+          2007 to '15
+        </span>
+      </h3>
+      <p>
+        My career began as a web developer for Ingenium IDS working alongside the Head of IT and Development. Ingenium hosted CPD approved events for public sector workplace management while building up a database of high level public sector contacts. My first roles in this employment included designing and making websites and email campaigns for each event and developing an order system that would track everything from purchase orders and sales to scanning attendee badges for reporting. My role at the events as Technical Support Manager included setup of reception laptops that connected wirelessly to our event server that hosted a local version of the order system, setup of presentation laptops and helping speakers with any last-minute alterations.
+      </p>
+      <p>
+        As the company evolved I was promoted to Senior Web Developer and we developed a marketing system that would utilise the ever-growing public sector database to publicise our own events and saw an opportunity for a data-included public sector marketing tool. The company invested in 2 new members of the development team and a high end email campaign tool called PowerMTA and we started development of a system dubbed iServe that would later become the backbone to Ingenium. iServe enabled customers to query our database, import and query their own data, manage suppressions, send campaigns to query results, build dynamic surveys, track opens, clicks and forwards of sent campaigns and feedback with detailed and customisable reports. iServe gathered many highly regarded clients such as IBM, Oracle and Xerox. To publish iServe survey results and newly adopted online webinar events the company created a sub-brand titled iGov. I developed the iGov News website that hosts video presentations, survey results and public sector news articles. iServe continues it's development today and is capable of sending millions of emails each day.
+      </p>
+      <h3>
+        Synextra
+        <span>
+          2015 to present
+        </span>
+      </h3>
+      <p></p>
+
+      <h2>Qualifications</h2>
+      <div class="row">
+        <div class="col-sm">
+          <ul>
+            <li>
+              <span>AS Engineering</span>
+            </li>
+            <li>
+              <span>AS Music Technology</span>
+            </li>
+            <li>
+              <span>GCSE Mathematics grade B</span>
+            </li>
+            <li>
+              <span>GCSE Science Double Award grades C, C</span>
+            </li>
+            <li>
+              <span>GCSE English grade C</span>
+            </li>
+            <li>
+              <span>GCSE Art and Design grade C</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm">
+          <ul>
+            <li>
+              <span>GCSE English Literature grade D</span>
+            </li>
+            <li>
+              <span>GCSE German grade D</span>
+            </li>
+            <li>
+              <span>GCSE Information and Communication Technology grade D</span>
+            </li>
+            <li>
+              <span>GCSE Engineering Double Award grade D, D</span>
+            </li>
+            <li>
+              <span>GCSE Geography grade E</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+
+    <div
+      id="Moon"
+      class="visible-night"
+    >
+      <div class="crater"></div>
+      <div class="crater"></div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-6 col-sm-8 col-md-9 col-lg-10">
+          <p>
+            Each project poses the next problem. For each problem there is a neat solution.
+          </p>
+          <p>
+            Thank you for your interest and consideration.
+          </p>
+          <p>
+            Jason Royle.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+</html>
