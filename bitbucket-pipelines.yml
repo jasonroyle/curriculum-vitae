@@ -4,7 +4,8 @@ definitions:
   steps:
     - step: &install
         name: Install
-        artifacts: node_modules/**
+        artifacts:
+          - node_modules/**
         script:
           - nvm install
           - npm install
