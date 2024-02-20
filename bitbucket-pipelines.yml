@@ -21,7 +21,7 @@ pipelines:
       - step: *build
       - step:
           name: Deploy to staging
-          deployment: staging
+          deployment: Staging
           script:
             - pipe: atlassian/rsync-deploy:0.12.0
               variables:
@@ -35,7 +35,7 @@ pipelines:
       - step: *build
       - step:
           name: Deploy to production
-          deployment: production
+          deployment: Production
           script:
             - pipe: atlassian/rsync-deploy:0.12.0
               variables:
