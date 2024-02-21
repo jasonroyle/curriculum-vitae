@@ -2,7 +2,7 @@
   "name": "curriculum-vitae",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "curriculum-vitae",
+  "prefix": "cv",
   "sourceRoot": "./src",
   "tags": [],
   "targets": {

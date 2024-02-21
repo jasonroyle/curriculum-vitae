@@ -24,7 +24,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "curriculumVitae",
+            "prefix": "cv",
             "style": "camelCase"
           }
         ],
@@ -32,7 +32,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "curriculum-vitae",
+            "prefix": "cv",
             "style": "kebab-case"
           }
         ]
