@@ -14,12 +14,26 @@ definitions:
         script:
           - nvm install
           - npm run build
+    - step: &nx-install
+        name: Install
+        artifacts:
+          - node_modules/**
+        script:
+          - nvm install
+          - npm ci
+    - step: &nx-build
+        name: Build
+        artifacts:
+          - dist/**
+        script:
+          - nvm install
+          - npm run build
 
 pipelines:
   branches:
     develop:
-      - step: *install
-      - step: *build
+      - step: *nx-install
+      - step: *nx-build
       - step:
           name: Deploy to staging
           deployment: Staging
