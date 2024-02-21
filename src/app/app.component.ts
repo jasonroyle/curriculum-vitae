@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+
+import { TechCloudComponent } from './tech-cloud/tech-cloud.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [TechCloudComponent],
   selector: 'cv-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'curriculum-vitae';
-}
+export class AppComponent {}
