@@ -28,8 +28,8 @@ pipelines:
               variables:
                 EXTRA_ARGS: --chmod=D2755,F0644
                 LOCAL_PATH: ${BITBUCKET_CLONE_DIR}/
-                REMOTE_PATH: /var/www/curriculum-vitae/staging/public/
-                SERVER: web.jasonroyle.com
+                REMOTE_PATH: /var/www/curriculum-vitae/ui/staging/
+                SERVER: web-03.jasonroyle.com
                 USER: deploy
     master:
       - step: *install
@@ -42,6 +42,6 @@ pipelines:
               variables:
                 EXTRA_ARGS: --chmod=D2755,F0644
                 LOCAL_PATH: ${BITBUCKET_CLONE_DIR}/
-                REMOTE_PATH: /var/www/curriculum-vitae/production/public/
-                SERVER: web.jasonroyle.com
+                REMOTE_PATH: /var/www/curriculum-vitae/ui/production/
+                SERVER: web-03.jasonroyle.com
                 USER: deploy
