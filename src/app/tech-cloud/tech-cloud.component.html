@@ -1,1 +1,7 @@
-<p>tech-cloud works!</p>
+@for (techItem of tech; track techItem; let index = $index) {
+<div class="stack scatter scatter-{{ index }}">
+  <div class="stack tech-card">
+    <img [alt]="techItem.name" [src]="techItem.img" />
+  </div>
+</div>
+}
