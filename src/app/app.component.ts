@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
-import { TechCloudComponent } from './tech-cloud/tech-cloud.component';
+import { TechStackComponent } from './tech-stack/tech-stack.component';
 
 @Component({
   standalone: true,
-  imports: [TechCloudComponent],
+  imports: [TechStackComponent],
   selector: 'cv-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

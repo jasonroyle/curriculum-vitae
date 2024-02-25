@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TechCloudComponent } from './tech-cloud.component';
+import { ScatterComponent } from './scatter.component';
 
-describe('TechCloudComponent', () => {
-  let component: TechCloudComponent;
-  let fixture: ComponentFixture<TechCloudComponent>;
+describe('ScatterComponent', () => {
+  let component: ScatterComponent;
+  let fixture: ComponentFixture<ScatterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TechCloudComponent],
+      imports: [ScatterComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TechCloudComponent);
+    fixture = TestBed.createComponent(ScatterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

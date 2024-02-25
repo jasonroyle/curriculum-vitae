@@ -1,0 +1,5 @@
+@for (item of stack; track item;) {
+<div class="cv-stack">
+  <ng-container [ngTemplateOutlet]="item.templeteRef"></ng-container>
+</div>
+}

@@ -1,0 +1,15 @@
+<cv-stack (click)="replay()">
+  @for (tech of techStack; track tech; let techIndex = $index) {
+  <ng-template cvStack>
+    <cv-scatter
+      [delay]="techIndex * 50"
+      [scattered]="scattered"
+      (scatterDone)="onScatterDone($event)"
+    >
+      <div class="tech">
+        <img [alt]="tech.name" [src]="tech.img" />
+      </div>
+    </cv-scatter>
+  </ng-template>
+  }
+</cv-stack>
