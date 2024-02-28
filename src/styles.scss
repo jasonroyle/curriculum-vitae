@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@include mat.core();
+
+// Define a light theme
+$cv-light-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$pink-palette),
+  ),
+  // Only include `typography` and `density` in the default light theme.
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Define a dark theme
+$cv-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: mat.define-palette(mat.$pink-palette),
+    accent: mat.define-palette(mat.$blue-grey-palette),
+  ),
+));
+
+// Apply the light theme by default
+@include mat.core-theme($cv-light-theme);
+
+@include mat.button-theme($cv-light-theme);
+@include mat.divider-theme($cv-light-theme);
+
+// Apply the dark theme only when the user prefers light themes.
+@media (prefers-color-scheme: dark) {
+  // Use the `-color` mixins to only apply color styles without reapplying the same
+  // typography and density styles.
+  @include mat.core-color($cv-dark-theme);
+
+  @include mat.button-color($cv-dark-theme);
+  @include mat.divider-color($cv-dark-theme);
+}

@@ -24,9 +24,11 @@ interface ScatterParams {
   rotation: number;
 }
 
+type ScatterState = 'origin' | 'scatter';
+
 interface ScatterTrigger {
   params: ScatterParams;
-  value: boolean;
+  value: ScatterState;
 }
 
 @Component({
@@ -38,14 +40,17 @@ interface ScatterTrigger {
   animations: [
     trigger('scatter', [
       state(
-        'true',
+        'scatter',
         style({
           transform: 'translate({{ x }}%, {{ y }}%) rotate({{ rotation }}turn)',
         }),
         { params: { rotation: 0, x: 0, y: 0 } }
       ),
+      transition('* => origin', [animate('{{ duration }}ms ease-in-out')], {
+        params: { duration: 1000 },
+      }),
       transition(
-        '* => *',
+        '* => scatter',
         [animate('{{ duration }}ms {{ delay }}ms ease-in-out')],
         { params: { delay: 0, duration: 1000 } }
       ),
@@ -56,17 +61,17 @@ export class ScatterComponent {
   @Input() delay = 0;
   @Input() duration = 1000;
   @HostBinding('style.height') @Input() height = '100%';
-  @Input() maxX = 80;
-  @Input() maxY = 80;
+  @Input() maxX = 100;
+  @Input() maxY = 100;
   @HostBinding('@scatter') scatter: ScatterTrigger = {
     params: this._generateParams(),
-    value: false,
+    value: 'origin',
   };
   @Output() scatterDone = new EventEmitter<AnimationEvent>();
   @Input() set scattered(value: boolean) {
     let params = this.scatter.params;
-    if (!this.scatter.value) params = this._generateParams();
-    this.scatter = { params, value };
+    if (this.scatter.value === 'origin') params = this._generateParams();
+    this.scatter = { params, value: value ? 'scatter' : 'origin' };
   }
   @HostBinding('style.width') @Input() width = '100%';
 

@@ -7,9 +7,10 @@
   border-radius: 10px;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  width: 200px;
-  height: 200px;
-  padding: 20px;
+  width: 8rem;
+  height: 8rem;
+  padding: 1rem;
+  pointer-events: auto;
 }
 
 img {

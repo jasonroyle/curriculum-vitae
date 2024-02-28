@@ -1,5 +1,9 @@
-@for (item of stack; track item;) {
-<div class="cv-stack">
+@for (item of stack; track item; let stackIndex = $index) {
+<div
+  [class.cv-stack-even]="!(stackIndex % 2)"
+  [class.cv-stack-odd]="stackIndex % 2"
+  class="cv-stack"
+>
   <ng-container [ngTemplateOutlet]="item.templeteRef"></ng-container>
 </div>
 }
