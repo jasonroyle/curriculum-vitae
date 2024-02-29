@@ -1,0 +1,21 @@
+<cv-stack>
+  @for (photo of photos; track photo; let photoIndex = $index) {
+  <ng-template #cvStack="cvStack" cvStack>
+    <cv-scatter
+      #cvScatter
+      [delayMultiplier]="50"
+      [duration]="800"
+      [maxRotation]="maxRotation"
+      [maxX]="maxX"
+      [maxY]="maxY"
+      [scattered]="true"
+      [stackCount]="photos.length"
+      (click)="onScatterClick(cvScatter, cvStack)"
+    >
+      <div class="photo">
+        <img [alt]="photo.name" [src]="photo.img" />
+      </div>
+    </cv-scatter>
+  </ng-template>
+  }
+</cv-stack>

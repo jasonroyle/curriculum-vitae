@@ -1,6 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject, delay } from 'rxjs';
 
 import { ScatterComponent } from '../scatter/scatter.component';
 import { StackComponent } from '../stack/stack.component';
@@ -20,6 +21,7 @@ interface Tech {
 })
 export class TechStackComponent {
   private _scatterDoneCounter = 0;
+  private _scattered$ = new BehaviorSubject(false);
   @ViewChildren(StackDirective)
   private _stackDirectives!: QueryList<StackDirective>;
   private readonly _techStack: Tech[] = [
@@ -40,7 +42,8 @@ export class TechStackComponent {
     { name: 'TypeScript', img: '/assets/tech/typescript.svg' },
   ];
   private _zIndex: number;
-  scattered = false;
+  originOffsetModifier = 0;
+  scattered$ = this._scattered$.asObservable().pipe(delay(0));
   shuffle = false;
   techStack: Tech[];
 
@@ -52,14 +55,21 @@ export class TechStackComponent {
       .map(({ value }) => value);
   }
 
-  onScatterClick(scatter: ScatterComponent, stack: StackDirective): void {
-    stack.zIndex = this._zIndex;
-    scatter.zIndex = this._zIndex;
-    scatter.scattered = false;
+  onScatterClick(
+    scatterComponent: ScatterComponent,
+    stackDirective: StackDirective
+  ): void {
+    if (!scatterComponent.scattered) return;
+    stackDirective.zIndex = this._zIndex;
+    scatterComponent.zIndex = this._zIndex;
+    scatterComponent.scattered = false;
     this._zIndex++;
   }
 
   onScatterDone({ fromState, toState }: AnimationEvent): void {
+    if (fromState === 'origin' && toState === 'scatter') {
+      this.originOffsetModifier = -this._techStack.length;
+    }
     if (fromState === 'scatter' && toState === 'origin') {
       this._scatterDoneCounter++;
       if (this._scatterDoneCounter === this._techStack.length) {
@@ -70,8 +80,8 @@ export class TechStackComponent {
             (stackDirective.zIndex =
               stackDirective.zIndex - this._techStack.length)
         );
-        this.scattered = false;
-        this.shuffle = true;
+        this._scattered$.next(false);
+        this._scattered$.next(true);
       }
     }
     if (fromState === 'void' && toState === 'origin') {
@@ -82,7 +92,7 @@ export class TechStackComponent {
   onShuffleDone({ toState }: AnimationEvent): void {
     if (toState) {
       this.shuffle = false;
-      this.scattered = true;
+      this._scattered$.next(true);
     }
   }
 }

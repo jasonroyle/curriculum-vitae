@@ -1,4 +1,5 @@
 :host {
+  position: static;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,13 +8,24 @@
 section {
   width: 100%;
   max-width: 900px;
+  z-index: 1;
+
+  &.card {
+    background-color: rgba(220, 220, 220, 0.2);
+    border-radius: 1rem;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    margin: 2rem 1rem;
+    padding: 1rem 2rem;
+  }
 
   &.cv-tech-stack-section {
     max-width: 1400px;
+    z-index: 0;
   }
 }
 
 .cv-tech-stack-container {
-  height: 30rem;
+  height: 20rem;
   max-height: 60vh;
 }

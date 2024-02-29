@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
+import { BiographyComponent } from './biography/biography.component';
 import { TechStackComponent } from './tech-stack/tech-stack.component';
 import { TimelineComponent } from './timeline/timeline.component';
 
 @Component({
   standalone: true,
-  imports: [TechStackComponent, TimelineComponent],
+  imports: [BiographyComponent, TechStackComponent, TimelineComponent],
   selector: 'cv-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

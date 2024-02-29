@@ -1,0 +1,10 @@
+:host {
+  position: static;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 3fr;
+}
+
+.cv-biography {
+  z-index: 1;
+}

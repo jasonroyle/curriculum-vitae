@@ -65,7 +65,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 0,
-                    duration: 1500,
+                    duration: 2000,
                     rotation: 15,
                     x: 6,
                     y: 1,
@@ -82,7 +82,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 50,
-                    duration: 1500,
+                    duration: 2000,
                     rotation: -15,
                     x: -6,
                     y: -1,
