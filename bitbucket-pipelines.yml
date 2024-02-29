@@ -8,7 +8,7 @@ definitions:
           - node_modules/**
         script:
           - nvm install
-          - npm ci
+          - npm install
     - step: &build
         name: Build
         script:
@@ -42,9 +42,9 @@ pipelines:
               variables:
                 EXTRA_ARGS: --chmod=D2755,F0644
                 LOCAL_PATH: ${BITBUCKET_CLONE_DIR}/dist/curriculum-vitae/browser/
-                REMOTE_PATH: /var/www/curriculum-vitae/ui/staging/
-                SERVER: web-03.jasonroyle.com
-                USER: deploy
+                REMOTE_PATH: ${REMOTE_PATH}
+                SERVER: ${SERVER}
+                USER: ${USER}
     master:
       - step: *install
       - step: *build
@@ -55,7 +55,7 @@ pipelines:
             - pipe: atlassian/rsync-deploy:0.12.0
               variables:
                 EXTRA_ARGS: --chmod=D2755,F0644
-                LOCAL_PATH: ${BITBUCKET_CLONE_DIR}/dist/curriculum-vitae/browser/
-                REMOTE_PATH: /var/www/curriculum-vitae/ui/production/
-                SERVER: web-03.jasonroyle.com
-                USER: deploy
+                LOCAL_PATH: ${BITBUCKET_CLONE_DIR}/
+                REMOTE_PATH: ${REMOTE_PATH}
+                SERVER: ${SERVER}
+                USER: ${USER}
