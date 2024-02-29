@@ -12,22 +12,27 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+interface OriginParams {
+  originOffset: number;
+}
+
 interface ScatterParams {
   delay: number;
   duration: number;
+  rotation: number;
   x: number;
   y: number;
-  rotation: number;
 }
 
 type ScatterState = 'origin' | 'scatter';
 
 interface ScatterTrigger {
-  params: ScatterParams;
+  params?: OriginParams & ScatterParams;
   value: ScatterState;
 }
 
@@ -39,6 +44,13 @@ interface ScatterTrigger {
   styleUrl: './scatter.component.scss',
   animations: [
     trigger('scatter', [
+      state(
+        'origin',
+        style({
+          transform: 'translate({{ originOffset }}rem, {{ originOffset }}rem)',
+        }),
+        { params: { originOffset: 0 } }
+      ),
       state(
         'scatter',
         style({
@@ -57,25 +69,39 @@ interface ScatterTrigger {
     ]),
   ],
 })
-export class ScatterComponent {
-  @Input() delay = 0;
+export class ScatterComponent implements OnInit {
+  @Input() delayMultiplier = 50;
   @Input() duration = 1000;
   @HostBinding('style.height') @Input() height = '100%';
   @Input() maxX = 100;
   @Input() maxY = 100;
   @HostBinding('@scatter') scatter: ScatterTrigger = {
-    params: this._generateParams(),
     value: 'origin',
   };
   @Output() scatterDone = new EventEmitter<AnimationEvent>();
   @Input() set scattered(value: boolean) {
     let params = this.scatter.params;
-    if (this.scatter.value === 'origin') params = this._generateParams();
+    if (!params) return;
+    if (this.scatter.value === 'origin')
+      params = { ...params, ...this._generateScatterParams() };
+    if (this.scatter.value === 'scatter')
+      params = { ...params, ...this._generateOriginParams() };
     this.scatter = { params, value: value ? 'scatter' : 'origin' };
   }
+  @Input() stackCount = 0;
   @HostBinding('style.width') @Input() width = '100%';
+  @Input() zIndex = 0;
 
-  private _generateParams(): ScatterParams {
+  private _generateOriginParams(calibrateZIndex = true): OriginParams {
+    const originOffset =
+      ((this.zIndex - (calibrateZIndex ? this.stackCount : 0)) /
+        (this.stackCount - 1) -
+        0.5) *
+      2;
+    return { originOffset };
+  }
+
+  private _generateScatterParams(): ScatterParams {
     const maxX = this.maxX;
     const maxY = this.maxY;
     const x = Math.random() * maxX - maxX / 2;
@@ -83,7 +109,13 @@ export class ScatterComponent {
     const rotation =
       this._getRotationFactor([maxX, maxY], [x, y]) *
       ((x > 0 && y > 0) || (x < 0 && y < 0) ? -0.25 : 0.25);
-    return { delay: this.delay, duration: this.duration, rotation, x, y };
+    return {
+      delay: this.zIndex * this.delayMultiplier,
+      duration: this.duration,
+      rotation,
+      x,
+      y,
+    };
   }
 
   private _getRotationFactor(
@@ -93,6 +125,16 @@ export class ScatterComponent {
     x = Math.abs(x) / maxX;
     y = Math.abs(y) / maxY;
     return x > 0 ? (x - y + 1) / 2 : 0;
+  }
+
+  ngOnInit(): void {
+    this.scatter = {
+      ...this.scatter,
+      params: {
+        ...this._generateOriginParams(false),
+        ...this._generateScatterParams(),
+      },
+    };
   }
 
   @HostListener('@scatter.done', ['$event']) onScatterDone(

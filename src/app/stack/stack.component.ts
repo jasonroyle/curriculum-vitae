@@ -7,14 +7,12 @@ import {
   query,
   sequence,
   stagger,
-  state,
   style,
   transition,
   trigger,
   useAnimation,
 } from '@angular/animations';
 import {
-  AfterViewInit,
   Component,
   ContentChildren,
   EventEmitter,
@@ -55,11 +53,8 @@ const shuffleAnimation = animation([
   templateUrl: './stack.component.html',
   styleUrl: './stack.component.scss',
   animations: [
-    trigger('shuffleInOut', [
-      state('in', style({ opacity: '1' })),
-      state('void', style({ opacity: '0' })),
-      transition(':leave', animate('1s linear')),
-      transition('* => in', [
+    trigger('shuffle', [
+      transition('* => true', [
         group([
           animate('1s linear'),
           query(
@@ -70,7 +65,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 0,
-                    duration: 2000,
+                    duration: 1500,
                     rotation: 15,
                     x: 6,
                     y: 1,
@@ -87,7 +82,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 50,
-                    duration: 2000,
+                    duration: 1500,
                     rotation: -15,
                     x: -6,
                     y: -1,
@@ -101,20 +96,16 @@ const shuffleAnimation = animation([
     ]),
   ],
 })
-export class StackComponent implements AfterViewInit {
+export class StackComponent {
   @HostBinding('style.height') @Input() height = '100%';
-  @HostBinding('@shuffleInOut') shuffleInOut: 'in' | 'void' = 'void';
-  @Output() shuffleInOutDone = new EventEmitter<AnimationEvent>();
+  @HostBinding('@shuffle') @Input() shuffle = false;
+  @Output() shuffleDone = new EventEmitter<AnimationEvent>();
   @ContentChildren(StackDirective) stack!: QueryList<StackDirective>;
   @HostBinding('style.width') @Input() width = '100%';
 
-  ngAfterViewInit(): void {
-    setTimeout(() => (this.shuffleInOut = 'in'), 500);
-  }
-
-  @HostListener('@shuffleInOut.done', ['$event']) onShuffleInOutDone(
+  @HostListener('@shuffle.done', ['$event']) onShuffleDone(
     event: AnimationEvent
   ) {
-    this.shuffleInOutDone.emit(event);
+    this.shuffleDone.emit(event);
   }
 }

@@ -1,7 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, delay } from 'rxjs';
 
 import { ScatterComponent } from '../scatter/scatter.component';
 import { StackComponent } from '../stack/stack.component';
@@ -21,7 +20,8 @@ interface Tech {
 })
 export class TechStackComponent {
   private _scatterDoneCounter = 0;
-  private readonly _scattered$ = new BehaviorSubject<boolean>(false);
+  @ViewChildren(StackDirective)
+  private _stackDirectives!: QueryList<StackDirective>;
   private readonly _techStack: Tech[] = [
     { name: 'Angular', img: '/assets/tech/angular.svg' },
     { name: 'Ansible', img: '/assets/tech/ansible.svg' },
@@ -39,22 +39,24 @@ export class TechStackComponent {
     { name: 'Sass', img: '/assets/tech/sass.png' },
     { name: 'TypeScript', img: '/assets/tech/typescript.svg' },
   ];
-  readonly scattered$ = this._scattered$.asObservable().pipe(delay(0));
-  techStack!: Tech[];
+  private _zIndex: number;
+  scattered = false;
+  shuffle = false;
+  techStack: Tech[];
 
   constructor() {
-    this.shuffle();
-  }
-
-  private _shuffle(): Tech[] {
-    return this._techStack
+    this._zIndex = this._techStack.length;
+    this.techStack = this._techStack
       .map((value) => ({ order: Math.random(), value }))
       .sort((a, b) => a.order - b.order)
       .map(({ value }) => value);
   }
 
-  onShuffleInOutDone({ toState }: AnimationEvent): void {
-    if (toState === 'in') this._scattered$.next(true);
+  onScatterClick(scatter: ScatterComponent, stack: StackDirective): void {
+    stack.zIndex = this._zIndex;
+    scatter.zIndex = this._zIndex;
+    scatter.scattered = false;
+    this._zIndex++;
   }
 
   onScatterDone({ fromState, toState }: AnimationEvent): void {
@@ -62,18 +64,25 @@ export class TechStackComponent {
       this._scatterDoneCounter++;
       if (this._scatterDoneCounter === this._techStack.length) {
         this._scatterDoneCounter = 0;
-        // this.shuffle();
-        this._scattered$.next(false);
-        this._scattered$.next(true);
+        this._zIndex = this._techStack.length;
+        this._stackDirectives.forEach(
+          (stackDirective) =>
+            (stackDirective.zIndex =
+              stackDirective.zIndex - this._techStack.length)
+        );
+        this.scattered = false;
+        this.shuffle = true;
       }
+    }
+    if (fromState === 'void' && toState === 'origin') {
+      this.shuffle = true;
     }
   }
 
-  // @HostListener('click') replay(): void {
-  //   this.scattered = false;
-  // }
-
-  shuffle() {
-    this.techStack = this._shuffle();
+  onShuffleDone({ toState }: AnimationEvent): void {
+    if (toState) {
+      this.shuffle = false;
+      this.scattered = true;
+    }
   }
 }

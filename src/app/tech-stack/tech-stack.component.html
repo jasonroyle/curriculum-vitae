@@ -1,12 +1,15 @@
-<cv-stack (shuffleInOutDone)="onShuffleInOutDone($event)">
+<cv-stack [shuffle]="shuffle" (shuffleDone)="onShuffleDone($event)">
   @for (tech of techStack; track tech; let techIndex = $index) {
-  <ng-template cvStack>
+  <ng-template #cvStack="cvStack" cvStack>
     <cv-scatter
       #cvScatter
-      [delay]="techIndex * 50"
+      [delayMultiplier]="50"
+      [duration]="800"
       [maxY]="80"
-      [scattered]="(scattered$ | async) ?? false"
-      (click)="cvScatter.scattered = false"
+      [scattered]="scattered"
+      [stackCount]="techStack.length"
+      [zIndex]="techIndex"
+      (click)="onScatterClick(cvScatter, cvStack)"
       (scatterDone)="onScatterDone($event)"
     >
       <div class="tech">
