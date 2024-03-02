@@ -65,7 +65,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 0,
-                    duration: 2000,
+                    duration: 1000,
                     rotation: 15,
                     x: 6,
                     y: 1,
@@ -82,7 +82,7 @@ const shuffleAnimation = animation([
                 useAnimation(shuffleAnimation, {
                   params: {
                     delay: 50,
-                    duration: 2000,
+                    duration: 1000,
                     rotation: -15,
                     x: -6,
                     y: -1,
@@ -98,6 +98,7 @@ const shuffleAnimation = animation([
 })
 export class StackComponent {
   @HostBinding('style.height') @Input() height = '100%';
+  @Input() parallaxMultiplier = 0;
   @HostBinding('@shuffle') @Input() shuffle = false;
   @Output() shuffleDone = new EventEmitter<AnimationEvent>();
   @ContentChildren(StackDirective) stack!: QueryList<StackDirective>;

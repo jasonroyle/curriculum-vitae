@@ -14,10 +14,10 @@ export interface Photo {
   selector: 'cv-photos',
   standalone: true,
   imports: [CommonModule, ScatterComponent, StackComponent, StackDirective],
-  templateUrl: './photos.component.html',
-  styleUrl: './photos.component.scss',
+  templateUrl: './photo-stack.component.html',
+  styleUrl: './photo-stack.component.scss',
 })
-export class PhotosComponent {
+export class PhotoStackComponent {
   @Input() maxRotation = 0.05;
   @Input() maxX = 100;
   @Input() maxY = 100;

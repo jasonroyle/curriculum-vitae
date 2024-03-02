@@ -8,6 +8,7 @@
 section {
   width: 100%;
   max-width: 900px;
+  margin: 2rem 1rem;
   z-index: 1;
 
   &.card {
@@ -20,12 +21,12 @@ section {
   }
 
   &.cv-tech-stack-section {
-    max-width: 1400px;
     z-index: 0;
   }
 }
 
 .cv-tech-stack-container {
-  height: 20rem;
-  max-height: 60vh;
+  height: 22em;
+  max-height: 50vh;
+  font-size: 14px;
 }

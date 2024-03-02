@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Photo, PhotosComponent } from '../photos/photos.component';
+import {
+  Photo,
+  PhotoStackComponent,
+} from '../photo-stack/photo-stack.component';
 
 @Component({
   selector: 'cv-biography',
   standalone: true,
-  imports: [CommonModule, PhotosComponent],
+  imports: [CommonModule, PhotoStackComponent],
   templateUrl: './biography.component.html',
   styleUrl: './biography.component.scss',
 })

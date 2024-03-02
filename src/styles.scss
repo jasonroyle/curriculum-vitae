@@ -30,6 +30,7 @@ $cv-dark-theme: mat.define-dark-theme((
 @include mat.core-theme($cv-light-theme);
 
 @include mat.button-theme($cv-light-theme);
+@include mat.card-theme($cv-light-theme);
 @include mat.divider-theme($cv-light-theme);
 
 // Apply the dark theme only when the user prefers light themes.
@@ -39,5 +40,11 @@ $cv-dark-theme: mat.define-dark-theme((
   @include mat.core-color($cv-dark-theme);
 
   @include mat.button-color($cv-dark-theme);
+  @include mat.card-color($cv-dark-theme);
   @include mat.divider-color($cv-dark-theme);
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-attachment: fixed;
 }

@@ -21,6 +21,15 @@ interface OriginParams {
   originOffset: number;
 }
 
+interface ParallaxParams {
+  y: number;
+}
+
+interface ParallaxTrigger {
+  params?: ParallaxParams;
+  value: number;
+}
+
 interface ScatterParams {
   delay: number;
   duration: number;
@@ -43,6 +52,10 @@ interface ScatterTrigger {
   templateUrl: './scatter.component.html',
   styleUrl: './scatter.component.scss',
   animations: [
+    trigger('parallax', [
+      transition(':decrement', []),
+      transition(':increment', []),
+    ]),
     trigger('scatter', [
       state(
         'origin',
@@ -77,8 +90,10 @@ export class ScatterComponent implements OnInit {
   @Input() maxRotation = 0.25;
   @Input() maxX = 100;
   @Input() maxY = 100;
-  @Input() originOffsetModifier = 0;
   @Input() originOffsetMultiplier = 1;
+  @HostBinding('@parallax') parallax: ParallaxTrigger = {
+    value: 0,
+  };
   @HostBinding('@scatter') scatter: ScatterTrigger = {
     value: 'origin',
   };
@@ -102,11 +117,11 @@ export class ScatterComponent implements OnInit {
   @Input() stackCount = 0;
   @HostBinding('style.width') @Input() width = '100%';
   @Input() zIndex = 0;
+  @Input() zIndexModifier = 0;
 
   private _generateOriginParams(): OriginParams {
     const originOffset =
-      ((this.zIndex + this.originOffsetModifier) / (this.stackCount - 1) -
-        0.5) *
+      ((this.zIndex + this.zIndexModifier) / (this.stackCount - 1) - 0.5) *
       this.originOffsetMultiplier;
     return { originOffset };
   }

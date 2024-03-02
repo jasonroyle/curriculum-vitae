@@ -7,6 +7,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 })
 export class StackDirective {
   @Input() zIndex = 0;
+  @Input() zIndexModifier = 0;
 
   constructor(public templeteRef: TemplateRef<unknown>) {}
 }

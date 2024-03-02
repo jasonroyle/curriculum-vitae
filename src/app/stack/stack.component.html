@@ -2,6 +2,11 @@
 <div
   [class.cv-stack-even]="!(stackIndex % 2)"
   [class.cv-stack-odd]="stackIndex % 2"
+  [style.top]="
+    parallaxMultiplier *
+      ((stack.length - (item.zIndex + item.zIndexModifier)) / stack.length) +
+    'px'
+  "
   [style.zIndex]="item.zIndex"
   class="cv-stack"
 >
