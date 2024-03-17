@@ -1,21 +1,20 @@
 <cv-stack
-  [parallaxMultiplier]="parallaxMultiplier"
-  [shuffle]="shuffle"
-  (shuffleDone)="onShuffleDone($event)"
+  [parallaxXMultiplier]="parallaxXMultiplier"
+  [parallaxYMultiplier]="parallaxYMultiplier"
 >
   @for (tech of techStack; track tech; let techIndex = $index) {
   <ng-template #cvStack="cvStack" [zIndex]="techIndex" cvStack>
     <cv-scatter
       #cvScatter
-      [delayMultiplier]="50"
-      [duration]="800"
+      [delayMultiplier]="delayMultiplier"
+      [duration]="duration"
       [originOffsetMultiplier]="5"
       [scattered]="(scattered$ | async) ?? false"
-      [stackCount]="techStack.length"
+      [stackSize]="techStack.length"
       [zIndex]="techIndex"
-      [zIndexModifier]="zIndexModifier"
       (click)="onScatterClick(cvScatter, cvStack)"
-      (scatterDone)="onScatterDone($event)"
+      (scatterDone)="onScatterDone($event, cvStack)"
+      (scatterStart)="onScatterStart($event, techIndex, cvStack)"
     >
       <div class="tech">
         <img [alt]="tech.name" [src]="tech.img" />

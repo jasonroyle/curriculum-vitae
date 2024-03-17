@@ -98,7 +98,8 @@ const shuffleAnimation = animation([
 })
 export class StackComponent {
   @HostBinding('style.height') @Input() height = '100%';
-  @Input() parallaxMultiplier = 0;
+  @Input() parallaxXMultiplier = 0;
+  @Input() parallaxYMultiplier = 0;
   @HostBinding('@shuffle') @Input() shuffle = false;
   @Output() shuffleDone = new EventEmitter<AnimationEvent>();
   @ContentChildren(StackDirective) stack!: QueryList<StackDirective>;

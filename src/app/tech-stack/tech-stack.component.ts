@@ -1,12 +1,19 @@
 import { AnimationEvent } from '@angular/animations';
 import {
+  AfterViewInit,
   Component,
   HostListener,
   QueryList,
   ViewChildren,
 } from '@angular/core';
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { BehaviorSubject, delay } from 'rxjs';
+import {
+  BehaviorSubject,
+  connectable,
+  delay,
+  distinctUntilChanged,
+  tap,
+} from 'rxjs';
 
 import { ScatterComponent } from '../scatter/scatter.component';
 import { StackComponent } from '../stack/stack.component';
@@ -24,7 +31,7 @@ interface Tech {
   templateUrl: './tech-stack.component.html',
   styleUrl: './tech-stack.component.scss',
 })
-export class TechStackComponent {
+export class TechStackComponent implements AfterViewInit {
   private _scatterDoneCounter = 0;
   private _scattered$ = new BehaviorSubject(false);
   @ViewChildren(StackDirective)
@@ -46,12 +53,36 @@ export class TechStackComponent {
     { name: 'Sass', img: '/assets/tech/sass.png' },
     { name: 'TypeScript', img: '/assets/tech/typescript.svg' },
   ];
-  private _zIndex: number;
-  parallaxMultiplier = 0;
-  scattered$ = this._scattered$.asObservable().pipe(delay(0));
-  shuffle = false;
+  private _zIndex = 0;
+  delayMultiplier = 50;
+  duration = 800;
+  parallaxXMultiplier = 0;
+  parallaxYMultiplier = 0;
+  scattered$ = connectable(
+    this._scattered$.asObservable().pipe(
+      delay(0),
+      distinctUntilChanged(),
+      tap((scattered) => {
+        console.log({ scattered });
+        // When scattering
+        if (scattered) {
+          // Reset scatter done counter
+          this._scatterDoneCounter = 0;
+
+          this._zIndex = this._techStack.length;
+          // Set z-index of each stack item below 0
+          this._stackDirectives.forEach((stackDirective) => {
+            console.log('UPDATING', stackDirective);
+            stackDirective.zIndex =
+              stackDirective.zIndex - this._techStack.length;
+            stackDirective.zIndexModifier =
+              this._techStack.length - stackDirective.zIndex;
+          });
+        }
+      })
+    )
+  );
   techStack: Tech[];
-  zIndexModifier = 0;
 
   constructor(private _viewportScroller: ViewportScroller) {
     this._zIndex = this._techStack.length;
@@ -61,51 +92,71 @@ export class TechStackComponent {
       .map(({ value }) => value);
   }
 
+  ngAfterViewInit(): void {
+    this.scattered$.connect();
+  }
+
   onScatterClick(
     scatterComponent: ScatterComponent,
     stackDirective: StackDirective
   ): void {
     if (!scatterComponent.scattered) return;
+    stackDirective.transitionDelay = 0;
+    stackDirective.transitionDuration = this.duration;
     stackDirective.zIndex = this._zIndex;
-    stackDirective.zIndexModifier = this.zIndexModifier;
+    stackDirective.zIndexModifier = -this._zIndex;
     scatterComponent.zIndex = this._zIndex;
+    scatterComponent.zIndexModifier = 0;
     scatterComponent.scattered = false;
     this._zIndex++;
   }
 
-  onScatterDone({ fromState, toState }: AnimationEvent): void {
-    if (fromState === 'origin' && toState === 'scatter') {
-      this.zIndexModifier = -this._techStack.length;
+  onScatterDone(
+    { fromState, toState }: AnimationEvent,
+    stackDirective: StackDirective
+  ): void {
+    console.log('SCATTER DONE', { fromState, toState });
+    if (toState === 'origin') {
+      stackDirective.transitionDelay = 0;
+      stackDirective.transitionDuration = 20;
+    }
+    if (toState === 'scatter') {
+      stackDirective.transitionDelay = 0;
+      stackDirective.transitionDuration = 20;
+      stackDirective.zIndexModifier = this._techStack.length;
     }
     if (fromState === 'scatter' && toState === 'origin') {
       this._scatterDoneCounter++;
       if (this._scatterDoneCounter === this._techStack.length) {
         this._scatterDoneCounter = 0;
-        this._zIndex = this._techStack.length;
-        this._stackDirectives.forEach((stackDirective) => {
-          stackDirective.zIndex =
-            stackDirective.zIndex - this._techStack.length;
-          stackDirective.zIndexModifier = 0;
-        });
         this._scattered$.next(false);
         this._scattered$.next(true);
       }
     }
     if (fromState === 'void' && toState === 'origin') {
-      // this.shuffle = true;
-      this._scattered$.next(true);
+      this._scatterDoneCounter++;
+      if (this._scatterDoneCounter === this._techStack.length) {
+        this._scatterDoneCounter = 0;
+        this._scattered$.next(true);
+      }
+    }
+  }
+
+  onScatterStart(
+    { toState }: AnimationEvent,
+    index: number,
+    stackDirective: StackDirective
+  ): void {
+    if (toState === 'scatter') {
+      stackDirective.transitionDelay = index * this.delayMultiplier;
+      stackDirective.transitionDuration = this.duration;
+      stackDirective.zIndexModifier = 0;
     }
   }
 
   @HostListener('window:scroll') onScroll(): void {
     const scrollPosition = this._viewportScroller.getScrollPosition();
-    this.parallaxMultiplier = scrollPosition[1] / 3;
-  }
-
-  onShuffleDone({ toState }: AnimationEvent): void {
-    if (toState) {
-      this.shuffle = false;
-      this._scattered$.next(true);
-    }
+    this.parallaxXMultiplier = scrollPosition[0] / 3;
+    this.parallaxYMultiplier = scrollPosition[1] / 3;
   }
 }

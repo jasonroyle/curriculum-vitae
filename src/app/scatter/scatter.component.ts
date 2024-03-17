@@ -17,17 +17,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { StackItem } from '../stack/stack-item';
+
 interface OriginParams {
   originOffset: number;
-}
-
-interface ParallaxParams {
-  y: number;
-}
-
-interface ParallaxTrigger {
-  params?: ParallaxParams;
-  value: number;
 }
 
 interface ScatterParams {
@@ -52,10 +45,6 @@ interface ScatterTrigger {
   templateUrl: './scatter.component.html',
   styleUrl: './scatter.component.scss',
   animations: [
-    trigger('parallax', [
-      transition(':decrement', []),
-      transition(':increment', []),
-    ]),
     trigger('scatter', [
       state(
         'origin',
@@ -82,7 +71,7 @@ interface ScatterTrigger {
     ]),
   ],
 })
-export class ScatterComponent implements OnInit {
+export class ScatterComponent extends StackItem implements OnInit {
   private _scattered = false;
   @Input() delayMultiplier = 50;
   @Input() duration = 1000;
@@ -91,9 +80,6 @@ export class ScatterComponent implements OnInit {
   @Input() maxX = 100;
   @Input() maxY = 100;
   @Input() originOffsetMultiplier = 1;
-  @HostBinding('@parallax') parallax: ParallaxTrigger = {
-    value: 0,
-  };
   @HostBinding('@scatter') scatter: ScatterTrigger = {
     value: 'origin',
   };
@@ -101,6 +87,7 @@ export class ScatterComponent implements OnInit {
   get scatterState(): ScatterState {
     return this._scattered ? 'scatter' : 'origin';
   }
+  @Output() scatterStart = new EventEmitter<AnimationEvent>();
   get scattered(): boolean {
     return this._scattered;
   }
@@ -114,15 +101,14 @@ export class ScatterComponent implements OnInit {
       params = { ...params, ...this._generateOriginParams() };
     this.scatter = { params, value: this.scatterState };
   }
-  @Input() stackCount = 0;
+  @Input() stackSize = 0;
   @HostBinding('style.width') @Input() width = '100%';
-  @Input() zIndex = 0;
-  @Input() zIndexModifier = 0;
 
   private _generateOriginParams(): OriginParams {
     const originOffset =
-      ((this.zIndex + this.zIndexModifier) / (this.stackCount - 1) - 0.5) *
+      (this.modifiedZIndex / (this.stackSize - 1) - 0.5) *
       this.originOffsetMultiplier;
+    console.log({ originOffset });
     return { originOffset };
   }
 
@@ -136,7 +122,7 @@ export class ScatterComponent implements OnInit {
       this._getRotationFactor([maxX, maxY], [x, y]) *
       ((x > 0 && y > 0) || (x < 0 && y < 0) ? -maxRotation : maxRotation);
     return {
-      delay: this.zIndex * this.delayMultiplier,
+      delay: this.modifiedZIndex * this.delayMultiplier,
       duration: this.duration,
       rotation,
       x,
@@ -167,5 +153,11 @@ export class ScatterComponent implements OnInit {
     event: AnimationEvent
   ) {
     this.scatterDone.emit(event);
+  }
+
+  @HostListener('@scatter.start', ['$event']) onScatterStart(
+    event: AnimationEvent
+  ) {
+    this.scatterStart.emit(event);
   }
 }

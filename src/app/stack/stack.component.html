@@ -2,14 +2,22 @@
 <div
   [class.cv-stack-even]="!(stackIndex % 2)"
   [class.cv-stack-odd]="stackIndex % 2"
-  [style.top]="
-    parallaxMultiplier *
-      ((stack.length - (item.zIndex + item.zIndexModifier)) / stack.length) +
+  [style.left]="
+    parallaxXMultiplier *
+      ((stack.length - item.modifiedZIndex) / stack.length) +
     'px'
   "
+  [style.top]="
+    parallaxYMultiplier *
+      ((stack.length - item.modifiedZIndex) / stack.length) +
+    'px'
+  "
+  [style.transitionDelay]="item.transitionDelay + 'ms'"
+  [style.transitionDuration]="item.transitionDuration + 'ms'"
   [style.zIndex]="item.zIndex"
   class="cv-stack"
 >
+  <pre>{{ item.zIndex }} {{ item.modifiedZIndex }}</pre>
   <ng-container [ngTemplateOutlet]="item.templeteRef"></ng-container>
 </div>
 }
